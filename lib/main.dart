@@ -48,11 +48,10 @@ class _SmartCableHomePageState extends State<SmartCableHomePage>
 
   final pageView = <Widget>[
     DevicesPage(),
-    readingPage(),
-    projectPage(),
-    settingPage()
+    ReadingPage(),
+    ProjectPage(),
+    SettingPage()
   ];
-  int _selectedIndex = 0;
 
   @override
   String get restorationId => widget.restorationId;
@@ -70,7 +69,7 @@ class _SmartCableHomePageState extends State<SmartCableHomePage>
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _currentIndex.value = index;
     });
   }
 
@@ -112,7 +111,7 @@ class _SmartCableHomePageState extends State<SmartCableHomePage>
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
-            _currentIndex.value = index;
+            _onItemTapped(index);
           });
           // Navigator.of(context).push(route)
         },
@@ -140,6 +139,8 @@ class _NavigationAppBar extends StatelessWidget {
       case 'Project':
         return widget;
       case 'Setting':
+        return widget;
+      default:
         return widget;
     }
   }
